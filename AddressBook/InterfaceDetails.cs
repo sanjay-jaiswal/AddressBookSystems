@@ -9,5 +9,7 @@ namespace AddressBook
         public void AddDetails();
 
         public void Display();
+
+        public void Edit(string firstName);
     }
 }

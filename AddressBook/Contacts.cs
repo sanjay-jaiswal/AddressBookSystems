@@ -14,8 +14,8 @@ namespace AddressBook
         private string address;
         private string city;
         private string state;
-        private string zipCode;
-        private string phoneNumber;
+        private int zipCode;
+        private long phoneNumber;
         private string emailID;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace AddressBook
         /// <param name="zipCode"></param>
         /// <param name="phoneNumber"></param>
         /// <param name="emailID"></param>
-        public Contacts(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNumber, string emailID)
+        public Contacts(string firstName, string lastName, string address, string city, string state, int zipCode, long phoneNumber, string emailID)
         {
             this.firstName = firstName;
             this.lastName = lastName;
@@ -49,8 +49,8 @@ namespace AddressBook
         public string Address { get => this.address; set => this.address = value; }
         public string City { get => this.city; set => this.city = value; }
         public string State { get => this.state; set => this.state = value; }
-        public string ZipCode { get => this.zipCode; set => this.zipCode = value; }
-        public string PhoneNumber { get => this.phoneNumber; set => this.phoneNumber = value; }
+        public int ZipCode { get => this.zipCode; set => this.zipCode = value; }
+        public long PhoneNumber { get => this.phoneNumber; set => this.phoneNumber = value; }
         public string EmailID { get => this.emailID; set => this.emailID = value; }
 
 
