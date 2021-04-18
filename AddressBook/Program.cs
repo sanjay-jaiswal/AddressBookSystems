@@ -41,6 +41,8 @@ namespace AddressBook
                         string deletePerson = Console.ReadLine();
                         mydetail.Delete(deletePerson);
                         break;
+                    case 5:
+                        return;
                 }
             }
         }

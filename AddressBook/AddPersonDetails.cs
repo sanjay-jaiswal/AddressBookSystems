@@ -147,6 +147,7 @@ namespace AddressBook
             {
                 if (this.list[i].FirstName.Equals(firstName))
                 {
+                    //here index of i becomes null means record is deleted from that index position.
                     this.list[i] = null;
                 }
             }
