@@ -14,9 +14,10 @@ namespace AddressBook
         private string address;
         private string city;
         private string state;
-        private int zipCode;
-        private long phoneNumber;
+        private string zipCode;
+        private string mobileNumber;
         private string emailID;
+
 
         /// <summary>
         /// Passing value through constructor
@@ -29,15 +30,15 @@ namespace AddressBook
         /// <param name="zipCode"></param>
         /// <param name="phoneNumber"></param>
         /// <param name="emailID"></param>
-        public Contacts(string firstName, string lastName, string address, string city, string state, int zipCode, long phoneNumber, string emailID)
+        public Contacts(string firstName, string lastName, string address, string city, string state, string zipCode, string mobileNumber, string emailID)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.address = address;
             this.city = city;
             this.state = state;
-            this.zipCode = zipCode;
-            this.phoneNumber = phoneNumber;
+            this.ZipCode = zipCode;
+            this.mobileNumber = mobileNumber;
             this.emailID = emailID;
         }
 
@@ -49,8 +50,8 @@ namespace AddressBook
         public string Address { get => this.address; set => this.address = value; }
         public string City { get => this.city; set => this.city = value; }
         public string State { get => this.state; set => this.state = value; }
-        public int ZipCode { get => this.zipCode; set => this.zipCode = value; }
-        public long PhoneNumber { get => this.phoneNumber; set => this.phoneNumber = value; }
+        public string ZipCode { get => this.zipCode; set => this.zipCode = value; }
+        public string MobileNumber { get => this.mobileNumber; set => this.mobileNumber = value; }
         public string EmailID { get => this.emailID; set => this.emailID = value; }
 
 
@@ -61,7 +62,15 @@ namespace AddressBook
         /// <returns></returns>
         public override string ToString()
         {
-            return " FirstName = " + this.firstName + "\n LastName = " + this.lastName + "\n Address = " + this.address + "\n City = " + this.city + "\n State = " + this.state + "\n ZipCode = " + this.zipCode + "\n PhoneNumber = " + this.phoneNumber + "\n EmailID = " + this.emailID + "" + "\n";
+            return "\n  FirstName    : " + this.firstName
+                 + "\n  LastName     : " + this.lastName
+                 + "\n  Address      : " + this.address
+                 + "\n  City         : " + this.city
+                 + "\n  State        : " + this.state
+                 + "\n  ZipCode      : " + this.zipCode
+                 + "\n  MobileNumber : " + this.mobileNumber
+                 + "\n  EmailID      : " + this.emailID + "\n" +
+                   "/****************************************/";
         }
     }
 }
