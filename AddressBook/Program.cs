@@ -15,9 +15,10 @@ namespace AddressBook
             while (check == true)
             {
                 Console.WriteLine("========Please Enter Your Choice=========");
-                Console.WriteLine("1.Add Details");
-                Console.WriteLine("2.Display Details");
-                Console.WriteLine("3.Edit Details");
+                Console.WriteLine("1.Add Person's Details");
+                Console.WriteLine("2.Display Person's Details");
+                Console.WriteLine("3.Edit Person's Details");
+                Console.WriteLine("4.Delete Person's Details");
 
                 string str = Console.ReadLine();
                 int choice = Convert.ToInt32(str);
@@ -34,6 +35,11 @@ namespace AddressBook
                         Console.WriteLine("Enter firstName");
                         string name = Console.ReadLine();
                         mydetail.Edit(name);
+                        break;
+                    case 4:
+                        Console.WriteLine("Enter First Name:");
+                        string deletePerson = Console.ReadLine();
+                        mydetail.Delete(deletePerson);
                         break;
                 }
             }

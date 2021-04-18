@@ -18,51 +18,52 @@ namespace AddressBook
       /// </summary>
         public void AddDetails()
         {
-            Console.WriteLine("Enter first name");
+            Console.WriteLine("Please enter your first name : ");
             string firstName = Console.ReadLine();
             for (int i = 0; i < this.list.Count; i++)
             {
                 if (this.list[i].FirstName.Equals(firstName))
                 {
-                    Console.WriteLine("You entered the duplicate name...");
+                    Console.WriteLine("You have entered a duplicate name.");
                 }
             }
 
-            Console.WriteLine("Enter last name");
+            Console.WriteLine("Please enter your last name : ");
             string lastName = Console.ReadLine();
 
-            Console.WriteLine("Enter address");
+            Console.WriteLine("Please enter your address : ");
             string address = Console.ReadLine();
 
-            Console.WriteLine("Enter city");
+            Console.WriteLine("Please enter your city : ");
             string city = Console.ReadLine();
 
-            Console.WriteLine("Enter state");
+            Console.WriteLine("Please enter your state : ");
             string state = Console.ReadLine();
 
-            Console.WriteLine("Enter Zip Code");
+            Console.WriteLine("Please enter your Pincode : ");
             int zipCode = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter phoneNumber");
+            Console.WriteLine("Please enter your mobile number : ");
             long phoneNumber = Convert.ToInt64(Console.ReadLine());
             for (int i = 0; i < this.list.Count; i++)
             {
                 if (this.list[i].PhoneNumber.Equals(phoneNumber))
                 {
-                    Console.WriteLine("You entered the duplicate phone number...");
+                    Console.WriteLine("You entered a duplicate phone number.");
                 }
             }
 
-            Console.WriteLine("Enter EmailID");
+            Console.WriteLine("Please enter your email id : ");
             string emailID = Console.ReadLine();
 
-            Console.WriteLine("Your details are Added Successfully...");
+            Console.WriteLine("Your entered details are added Successfully!!!");
 
             this.person = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNumber, emailID);
             this.list.Add(this.person);
         }
+        
         /// <summary>
-        /// Display method.
+        /// To display all the contacts from list.
         /// </summary>
         public void Display()
         {
@@ -71,10 +72,11 @@ namespace AddressBook
                 Console.WriteLine(entry);
             }
         }
+        
         /// <summary>
-        /// Edit method.
+        /// This method is used to edit person's details using their first name
         /// </summary>
-        /// <param name="firstName">first name.</param>
+        /// <param name="firstName"></param>
         public void Edit(string firstName)
         {
             int check = 0;
@@ -86,8 +88,8 @@ namespace AddressBook
                     {
                         Contacts person = this.list[i];
                         Console.WriteLine(person);
-                        Console.WriteLine("Enter your choice for editing: ");
-                        Console.WriteLine("1.Address 2.City 3.State 4.Zip Code 5.Phone Number 6.Email ID 7.Exit");
+                        Console.WriteLine("===>>>Please enter your choice to edit :  ");
+                        Console.WriteLine(" 1.Address  2.City  3.State  4.Zip Code  5.Phone Number  6.Email ID  7.To exit");
                         string choice = Console.ReadLine();
                         int ch = Convert.ToInt32(choice);
                         switch (ch)
@@ -134,5 +136,22 @@ namespace AddressBook
                 }
             }
         }
+
+        /// <summary>
+        /// delete() method is used to delete records from address book using their first name.
+        /// </summary>
+        /// <param name="firstName"></param>
+        public void Delete(string firstName)
+        {
+            for (int i = 0; i < this.list.Count; i++)
+            {
+                if (this.list[i].FirstName.Equals(firstName))
+                {
+                    this.list[i] = null;
+                }
+            }
+            Console.WriteLine("You deleted your desired person successfully .");
+        }
+
     }
 }

@@ -11,5 +11,7 @@ namespace AddressBook
         public void Display();
 
         public void Edit(string firstName);
+
+        public void Delete(string firstName);
     }
 }
