@@ -10,8 +10,8 @@ namespace AddressBook
 
         public void Display();
 
-        public void Edit(string firstName,string lastName);
+        public void Edit(string firstName);
 
-        public void Delete(string firstName, string lastName);
+        public void Delete(string firstName);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AddressBook
 {
@@ -43,7 +44,7 @@ namespace AddressBook
                             AddPersonDetails addressBook = new AddPersonDetails();
                             dictionary.Add(name, addressBook);
                             Console.WriteLine("Your Address Book is Created.");
-                            addressBook.AddressBookMenu();
+                            addressBook.Menu();
                         }
                         break;
                     case 2:
@@ -51,7 +52,7 @@ namespace AddressBook
                         string addressBookName = Console.ReadLine();
                         if (dictionary.ContainsKey(addressBookName))
                         {
-                            dictionary[addressBookName].AddressBookMenu();
+                            dictionary[addressBookName].Menu();
                         }
                         else
                         {
@@ -67,7 +68,7 @@ namespace AddressBook
         /// <summary>
         /// AddressBook Menu to show multiple choice
         /// </summary>
-        public void AddressBookMenu()
+        public void Menu()
         {
             InterfaceDetails addressBookDetails = new AddPersonDetails();
             bool check = true;
@@ -92,18 +93,14 @@ namespace AddressBook
                         addressBookDetails.Display();
                         break;
                     case 3:
-                        Console.WriteLine("Enter First Name:");
+                        Console.WriteLine("Please Enter Your First Name : ");
                         string firstName = Console.ReadLine();
-                        Console.WriteLine("Enter Last Name:");
-                        string lastName = Console.ReadLine();
-                        addressBookDetails.Edit(firstName,lastName);
+                        addressBookDetails.Edit(firstName);
                         break;
                     case 4:
-                        Console.WriteLine("Enter First Name:");
+                        Console.WriteLine("Please Enter Your First Name : ");
                         string firstname = Console.ReadLine();
-                        Console.WriteLine("Enter Last Name:");
-                        string lastname = Console.ReadLine();
-                        addressBookDetails.Delete(firstname,lastname);
+                        addressBookDetails.Delete(firstname);
                         break;
                     case 5:
                         return;
@@ -114,22 +111,35 @@ namespace AddressBook
 
 
         /// <summary>
-        /// Adding details like first name , pincode etc.
+        /// Adding details like first name,last name,address , pincode etc.
         /// </summary>
         public void AddDetails()
         {
             Console.WriteLine("Please enter your first name : ");
             string firstName = Console.ReadLine();
-            for (int i = 0; i < this.list.Count; i++)
-            {
-                if (this.list[i].FirstName.Equals(firstName))
+            if (!Regex.Match(firstName, "^[A-Z][a-z]{2,}$").Success)
+                Console.WriteLine("Please enter first letter in Capital!!");
+                for (int i = 0; i < this.list.Count; i++)
                 {
-                    Console.WriteLine("You have entered a duplicate name.");
+                     if (this.list[i].FirstName.Equals(firstName))
+                     {
+                        Console.WriteLine("You have entered a duplicate name!!");
+                     }
                 }
-            }
 
             Console.WriteLine("Please enter your last name : ");
             string lastName = Console.ReadLine();
+            if (!Regex.Match(lastName, "^[A-Z][a-z]{2,}$").Success)
+            Console.WriteLine("Please enter first letter in Capital!!");
+
+////////////////////////////////
+
+            foreach (Contacts addressBook in list.FindAll(name => name.FirstName.Equals(firstName) && name.LastName.Equals(lastName)))
+            {
+                Console.WriteLine("You have entered a duplicate name!!");
+                return;
+            }
+//////////////////////////////////////
 
             Console.WriteLine("Please enter your address : ");
             string address = Console.ReadLine();
@@ -140,32 +150,16 @@ namespace AddressBook
             Console.WriteLine("Please enter your state : ");
             string state = Console.ReadLine();
 
-            Console.WriteLine("Please enter your state : ");
-            string zipCode = Console.ReadLine();
+            Console.WriteLine("Please enter your Pin Code : ");
+            int zipCode = Convert.ToInt32(Console.ReadLine());
 
-           
-
-            Console.WriteLine("Please enter your Pincode : ");
-            string phoneNumber = Console.ReadLine();
-
-            /*
-
-            Console.WriteLine("Please enter your mobile number : ");
-            str phoneNumber = Convert.ToInt64(Console.ReadLine());
-            for (int i = 0; i < this.list.Count; i++)
-            {
-                if (this.list[i].PhoneNumber.Equals(phoneNumber))
-                {
-                    Console.WriteLine("You entered a duplicate phone number.");
-                }
-            }
-
-
-            */
-
+            Console.WriteLine("Please enter your Mobile number : ");
+            long phoneNumber = Convert.ToInt64(Console.ReadLine());
 
             Console.WriteLine("Please enter your email id : ");
             string emailID = Console.ReadLine();
+            if (!Regex.Match(emailID, "^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+[.]+([a-zA-Z]{2,4})+[.]*([a-zA-Z]{2})*$").Success)
+            Console.WriteLine("You have entered invalid email id.\n");
 
             Console.WriteLine("Your entered details are added Successfully!!!");
 
@@ -178,13 +172,13 @@ namespace AddressBook
         /// </summary>
         public void Display()
         {
-            foreach (Contacts entry in this.list)
+            foreach (Contacts biodata in this.list)
             {
-                Console.WriteLine(entry);
+                Console.WriteLine(biodata);
             }
             if (list.Count == 0)
             {
-                Console.WriteLine("No Records in Address Book");
+                Console.WriteLine("There is no records in address book.");
             }
         }
 
@@ -192,12 +186,12 @@ namespace AddressBook
         /// This method is used to edit person's details using their first name
         /// </summary>
         /// <param name="firstName"></param>
-        public void Edit(string firstName, string lastName)
+        public void Edit(string firstName)
         {
             int check = 0;
             for (int i = 0; i < this.list.Count; i++)
             {
-                if (this.list[i].FirstName.Equals(firstName) && this.list[i].LastName.Equals(lastName))
+                if (this.list[i].FirstName.Equals(firstName))
                 {
                     while (check == 0)
                     {
@@ -210,35 +204,35 @@ namespace AddressBook
                         switch (ch)
                         {
                             case 1:
-                                Console.WriteLine("enter new address");
+                                Console.WriteLine("Please enter new address : ");
                                 string address = Console.ReadLine();
                                 addressBook.Address = address;
                                 break;
                             case 2:
-                                Console.WriteLine("enter new city");
+                                Console.WriteLine("Please enter new city : ");
                                 string city = Console.ReadLine();
                                 addressBook.City = city;
                                 break;
                             case 3:
-                                Console.WriteLine("enter new state");
+                                Console.WriteLine("Please enter new state : ");
                                 string state = Console.ReadLine();
                                 addressBook.State = state;
                                 break;
 
                             case 4:
-                                Console.WriteLine("enter new zipCode");
-                                string zipCode = Console.ReadLine();
+                                Console.WriteLine("Please enter new zip code : ");
+                                int zipCode = Convert.ToInt32(Console.ReadLine()); 
                                 addressBook.ZipCode = zipCode;
                                 break;
 
                             case 5:
-                                Console.WriteLine("enter new phoneNumber");
-                                string mobileNumber = Console.ReadLine();
-                                addressBook.MobileNumber = mobileNumber;
+                                Console.WriteLine("Please enter new mobile number : ");
+                                long phoneNumber = Convert.ToInt64(Console.ReadLine());
+                                addressBook.MobileNumber = phoneNumber;
                                 break;
 
                             case 6:
-                                Console.WriteLine("enter new Email ID");
+                                Console.WriteLine("Please enter new email id  : ");
                                 string emailID = Console.ReadLine();
                                 addressBook.EmailID = emailID;
                                 break;
@@ -256,16 +250,16 @@ namespace AddressBook
         /// delete() method is used to delete records from address book using their first name.
         /// </summary>
         /// <param name="firstName"></param>
-        public void Delete(string firstname, string lastname)
+        public void Delete(string firstName)
         {
             for (int i = 0; i < this.list.Count; i++)
             {
-                if (this.list[i].FirstName.Equals(firstname) && this.list[i].LastName.Equals(lastname))
+                if (this.list[i].FirstName.Equals(firstName))
                 {
                     this.list[i] = null;
                 }
             }
-            Console.WriteLine("Your expected entry is deleted from records!");
+            Console.WriteLine("You have deleted record successfully!!!");
         }
 
     }
