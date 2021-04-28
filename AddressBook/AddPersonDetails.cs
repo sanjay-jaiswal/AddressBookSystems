@@ -80,7 +80,8 @@ namespace AddressBook
                 Console.WriteLine("3. Edit Details");
                 Console.WriteLine("4. Delete Details");
                 Console.WriteLine("5. Search Person in the State or City");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. View Person by or State or City");
+                Console.WriteLine("7. Exit");
 
                 string choice = Console.ReadLine();
                 int ch = Convert.ToInt32(choice);
@@ -107,6 +108,9 @@ namespace AddressBook
                         addressBookDetails.SearchPersonInStateOrCity();
                         break;
                     case 6:
+                        addressBookDetails.ViewPersonsByStateOrCity();
+                        break;
+                    case 7:
                         return;
                 }
             }
@@ -295,6 +299,37 @@ namespace AddressBook
 
         }
 
+        /// <summary>
+        /// View person by state or city.
+        /// </summary>
+        public void ViewPersonsByStateOrCity()
+        {
+            Console.WriteLine("Please Select Your choice : ");
+            Console.WriteLine("1. State  2. City");
+            String choice = Console.ReadLine();
+            int choice1 = Convert.ToInt32(choice);
+            switch (choice1)
+            {
+                case 1:
+                    Console.WriteLine("Please Enter Your State : ");
+                    String state = Console.ReadLine();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i].State.Equals(state))
+                            Console.WriteLine(list[i]);
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Please Enter Your City : ");
+                    String city = Console.ReadLine();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (list[i].City.Equals(city))
+                            Console.WriteLine(list[i]);
+                    }
+                    break;
+            }
+        }
     }
 }
 

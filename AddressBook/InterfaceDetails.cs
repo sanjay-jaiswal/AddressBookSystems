@@ -15,5 +15,7 @@ namespace AddressBook
         public void Delete(string firstName);
 
         public void SearchPersonInStateOrCity();
+
+        public void ViewPersonsByStateOrCity();
     }
 }
