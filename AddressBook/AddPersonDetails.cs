@@ -33,7 +33,7 @@ namespace AddressBook
                 switch (choice1)
                 {
                     case 1:
-                        Console.WriteLine("Please enter the Name of Your Address Book : ");
+                        Console.WriteLine("Please Enter The Name Of Your Address Book : ");
                         string name = Console.ReadLine();
                         if (dictionary.ContainsKey(name))
                         {
@@ -75,11 +75,12 @@ namespace AddressBook
             while (check == true)
             {
                 Console.WriteLine("*************PLEASE SELECT YOUR CHOICE**************");
-                Console.WriteLine("1.Add Details");
-                Console.WriteLine("2.Display Details");
-                Console.WriteLine("3.Edit Details");
-                Console.WriteLine("4.Delete Details");
-                Console.WriteLine("5.Exit");
+                Console.WriteLine("1. Add Details");
+                Console.WriteLine("2. Display Details");
+                Console.WriteLine("3. Edit Details");
+                Console.WriteLine("4. Delete Details");
+                Console.WriteLine("5. Search Person in the State or City");
+                Console.WriteLine("6. Exit");
 
                 string choice = Console.ReadLine();
                 int ch = Convert.ToInt32(choice);
@@ -103,6 +104,9 @@ namespace AddressBook
                         addressBookDetails.Delete(firstname);
                         break;
                     case 5:
+                        addressBookDetails.SearchPersonInStateOrCity();
+                        break;
+                    case 6:
                         return;
                 }
             }
@@ -132,14 +136,12 @@ namespace AddressBook
             if (!Regex.Match(lastName, "^[A-Z][a-z]{2,}$").Success)
             Console.WriteLine("Please enter first letter in Capital!!");
 
-////////////////////////////////
-
+            //Check for duplicate name
             foreach (Contacts addressBook in list.FindAll(name => name.FirstName.Equals(firstName) && name.LastName.Equals(lastName)))
             {
                 Console.WriteLine("You have entered a duplicate name!!");
                 return;
             }
-//////////////////////////////////////
 
             Console.WriteLine("Please enter your address : ");
             string address = Console.ReadLine();
@@ -262,7 +264,47 @@ namespace AddressBook
             Console.WriteLine("You have deleted record successfully!!!");
         }
 
+        /// <summary>
+        /// Search a person by city or state
+        /// </summary>
+        public void SearchPersonInStateOrCity()
+        {
+            Console.WriteLine("Please Enter Your Choice Which You Want To search...");
+            Console.WriteLine("1. State 2. City");
+            string option = Console.ReadLine();
+            int select = Convert.ToInt32(option);
+            switch(select)
+            {
+                case 1:
+                    Console.WriteLine("Please Enter Your First Name : ");
+                    String nameToSearchInState = Console.ReadLine();
+                    foreach (Contacts addressBook in list.FindAll(e => e.FirstName == nameToSearchInState))
+                    {
+                        Console.WriteLine("State of " + nameToSearchInState + " is : " + addressBook.State +"\n");
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Please Enter Your First Name : ");
+                    string searchFirstNameInStateOrCity = Console.ReadLine();
+                    foreach (Contacts addressBook in list.FindAll(e => e.FirstName == searchFirstNameInStateOrCity))
+                    {
+                        Console.WriteLine("City of " + searchFirstNameInStateOrCity + " is : " + addressBook.City +"\n");
+                    }
+                    break;
+            }
+
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
 
 
