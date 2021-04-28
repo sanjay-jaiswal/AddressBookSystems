@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -79,9 +80,10 @@ namespace AddressBook
                 Console.WriteLine("2. Display Details");
                 Console.WriteLine("3. Edit Details");
                 Console.WriteLine("4. Delete Details");
-                Console.WriteLine("5. Search Person in the State or City");
-                Console.WriteLine("6. View Person by or State or City");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("5. Search Person In The State or City");
+                Console.WriteLine("6. View Person By State or City");
+                Console.WriteLine("7. Ability To Count Person By State or City");
+                Console.WriteLine("8. Exit");
 
                 string choice = Console.ReadLine();
                 int ch = Convert.ToInt32(choice);
@@ -111,6 +113,9 @@ namespace AddressBook
                         addressBookDetails.ViewPersonsByStateOrCity();
                         break;
                     case 7:
+                        addressBookDetails.PersonsCountByStateOrCity();
+                        return;
+                    case 8:
                         return;
                 }
             }
@@ -327,6 +332,41 @@ namespace AddressBook
                         if (list[i].City.Equals(city))
                             Console.WriteLine(list[i]);
                     }
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Count person by state or city.
+        /// </summary>
+        public void PersonsCountByStateOrCity()
+        {
+            int count = 0;
+            Console.WriteLine("Please Select An Option To Count Person By : ");
+            Console.WriteLine("1. State  2. City");
+            String choice = Console.ReadLine();
+            int choice1 = Convert.ToInt32(choice);
+            switch (choice1)
+            {
+                case 1:
+                    Console.WriteLine("Please Enter Your State : ");
+                    String state = Console.ReadLine();
+                    foreach (Contacts addressBook in list.FindAll(c => c.State == state))
+                    {
+                        //Will return total number of person in same state.
+                        count = list.Count();
+                    }
+                    Console.WriteLine(count);
+                    break;
+                case 2:
+                    Console.WriteLine("Please Enter Your City : ");
+                    String city = Console.ReadLine();
+                    foreach (Contacts addressBook in list.FindAll(c => c.City == city))
+                    {
+                        //Will return total number of person in same city.
+                        count = list.Count();
+                    }
+                    Console.WriteLine(count);
                     break;
             }
         }
