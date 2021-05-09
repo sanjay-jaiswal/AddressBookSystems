@@ -83,7 +83,8 @@ namespace AddressBook
                 Console.WriteLine("5. Search Person In The State or City");
                 Console.WriteLine("6. View Person By State or City");
                 Console.WriteLine("7. Ability To Count Person By State or City");
-                Console.WriteLine("8.Sort by Name");
+                Console.WriteLine("8. Sort Details");
+                ///Console.WriteLine("9. Sort by City, State or Zip");
                 Console.WriteLine("9. Exit");
 
                 string choice = Console.ReadLine();
@@ -117,7 +118,7 @@ namespace AddressBook
                         addressBookDetails.PersonsCountByStateOrCity();
                         return;
                     case 8:
-                        addressBookDetails.SortByFirstName();
+                        addressBookDetails.SortByName();
                         break;
                     case 9:
                         return;
@@ -136,18 +137,18 @@ namespace AddressBook
             string firstName = Console.ReadLine();
             if (!Regex.Match(firstName, "^[A-Z][a-z]{2,}$").Success)
                 Console.WriteLine("Please enter first letter in Capital!!");
-                for (int i = 0; i < this.list.Count; i++)
+            for (int i = 0; i < this.list.Count; i++)
+            {
+                if (this.list[i].FirstName.Equals(firstName))
                 {
-                     if (this.list[i].FirstName.Equals(firstName))
-                     {
-                        Console.WriteLine("You have entered a duplicate name!!");
-                     }
+                    Console.WriteLine("You have entered a duplicate name!!");
                 }
+            }
 
             Console.WriteLine("Please enter your last name : ");
             string lastName = Console.ReadLine();
             if (!Regex.Match(lastName, "^[A-Z][a-z]{2,}$").Success)
-            Console.WriteLine("Please enter first letter in Capital!!");
+                Console.WriteLine("Please enter first letter in Capital!!");
 
             //Check for duplicate name
             foreach (Contacts addressBook in list.FindAll(name => name.FirstName.Equals(firstName) && name.LastName.Equals(lastName)))
@@ -174,7 +175,7 @@ namespace AddressBook
             Console.WriteLine("Please enter your email id : ");
             string emailID = Console.ReadLine();
             if (!Regex.Match(emailID, "^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+[.]+([a-zA-Z]{2,4})+[.]*([a-zA-Z]{2})*$").Success)
-            Console.WriteLine("You have entered invalid email id.\n");
+                Console.WriteLine("You have entered invalid email id.\n");
 
             Console.WriteLine("Your entered details are added Successfully!!!");
 
@@ -236,7 +237,7 @@ namespace AddressBook
 
                             case 4:
                                 Console.WriteLine("Please enter new zip code : ");
-                                int zipCode = Convert.ToInt32(Console.ReadLine()); 
+                                int zipCode = Convert.ToInt32(Console.ReadLine());
                                 addressBook.ZipCode = zipCode;
                                 break;
 
@@ -286,14 +287,14 @@ namespace AddressBook
             Console.WriteLine("1. State 2. City");
             string option = Console.ReadLine();
             int select = Convert.ToInt32(option);
-            switch(select)
+            switch (select)
             {
                 case 1:
                     Console.WriteLine("Please Enter Your First Name : ");
                     String nameToSearchInState = Console.ReadLine();
                     foreach (Contacts addressBook in list.FindAll(e => e.FirstName == nameToSearchInState))
                     {
-                        Console.WriteLine("State of " + nameToSearchInState + " is : " + addressBook.State +"\n");
+                        Console.WriteLine("State of " + nameToSearchInState + " is : " + addressBook.State + "\n");
                     }
                     break;
                 case 2:
@@ -301,7 +302,7 @@ namespace AddressBook
                     string searchFirstNameInStateOrCity = Console.ReadLine();
                     foreach (Contacts addressBook in list.FindAll(e => e.FirstName == searchFirstNameInStateOrCity))
                     {
-                        Console.WriteLine("City of " + searchFirstNameInStateOrCity + " is : " + addressBook.City +"\n");
+                        Console.WriteLine("City of " + searchFirstNameInStateOrCity + " is : " + addressBook.City + "\n");
                     }
                     break;
             }
@@ -375,6 +376,8 @@ namespace AddressBook
             }
         }
 
+        /*
+
         /// <summary>
         /// Sorting details by first name.
         /// </summary>
@@ -393,9 +396,42 @@ namespace AddressBook
             }
         }
 
+        */
+
+
+        public void SortByName()
+        {
+            list.Sort(this.SortByNameCityOrZip);
+            this.Display();
+        }
+
+        /// <summary>
+        /// Method to sort by name,city,state or zip.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public int SortByNameCityOrZip(Contacts x, Contacts y)
+        {
+            Console.WriteLine("Please enter your choice for sorting : ");
+            Console.WriteLine("1. First Name 2. City 3. State 4. Zip Code");
+            String choice = Console.ReadLine();
+            int choice1 = Convert.ToInt32(choice);
+            switch (choice1)
+            {
+                case 1:
+                    return x.FirstName.CompareTo(y.FirstName);
+                case 2:
+                    return x.City.CompareTo(y.City);
+                case 3:
+                    return x.State.CompareTo(y.State);
+                case 4:
+                    return x.ZipCode.CompareTo(y.ZipCode);
+            }
+            return 0;
+        }
     }
 }
-
 
 
 

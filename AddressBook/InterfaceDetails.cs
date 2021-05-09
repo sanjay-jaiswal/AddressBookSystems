@@ -46,6 +46,11 @@ namespace AddressBook
         /// <summary>
         /// Sorting entries by first ame.
         /// </summary>
-        public void SortByFirstName();    
+        // public void SortByFirstName();
+
+        /// <summary>
+        /// Sort by name,city or zip.
+        /// </summary>
+        public void SortByName();
     }
 }
