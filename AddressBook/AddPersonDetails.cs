@@ -83,7 +83,8 @@ namespace AddressBook
                 Console.WriteLine("5. Search Person In The State or City");
                 Console.WriteLine("6. View Person By State or City");
                 Console.WriteLine("7. Ability To Count Person By State or City");
-                Console.WriteLine("8. Exit");
+                Console.WriteLine("8.Sort by Name");
+                Console.WriteLine("9. Exit");
 
                 string choice = Console.ReadLine();
                 int ch = Convert.ToInt32(choice);
@@ -116,6 +117,9 @@ namespace AddressBook
                         addressBookDetails.PersonsCountByStateOrCity();
                         return;
                     case 8:
+                        addressBookDetails.SortByFirstName();
+                        break;
+                    case 9:
                         return;
                 }
             }
@@ -370,6 +374,25 @@ namespace AddressBook
                     break;
             }
         }
+
+        /// <summary>
+        /// Sorting details by first name.
+        /// </summary>
+        public void SortByFirstName()
+        {
+            List<string> sortList = new List<string>();
+            foreach (Contacts contacts in list)
+            {
+                string sort = contacts.ToString();
+                sortList.Add(sort);
+            }
+            sortList.Sort();
+            foreach (string sort in sortList)
+            {
+                Console.WriteLine(sort);
+            }
+        }
+
     }
 }
 
