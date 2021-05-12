@@ -1,0 +1,37 @@
+﻿FirstName    : Sanju
+LastName     : Jaiswal
+Address      : Madgaon
+City         : Margao
+State        : Goa
+ZipCode      : 403707
+PhoneNumber  : 9975264008
+EmailID      : sjsanju51@gmail.com/***********************************************/
+   FirstName    : Sanju
+  LastName     : Jaish
+  Address      : dav
+  City         : marg
+  State        : goa
+  ZipCode      : 554433
+  MobileNumber : 8877665544
+  EmailID      : sahh@gmail.com
+/*********************************************/
+/***********************************************/
+   FirstName    : Sanju
+  LastName     : Jaish
+  Address      : dav
+  City         : marg
+  State        : goa
+  ZipCode      : 554433
+  MobileNumber : 8877665544
+  EmailID      : sahh@gmail.com
+/*********************************************/
+/***********************************************/
+   FirstName    : Sachin
+  LastName     : Singh
+  Address      : Bhopal
+  City         : Bhopal
+  State        : MP
+  ZipCode      : 224433
+  MobileNumber : 9977553300
+  EmailID      : sachin12@gmail.com
+/*********************************************/

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +13,7 @@ namespace AddressBook
     public class AddPersonDetails : InterfaceDetails
     {
         //List is used to store contacts details
-        private readonly List<Contacts> list = new List<Contacts>();
+        public readonly List<Contacts> list = new List<Contacts>();
 
         Dictionary<string, AddPersonDetails> dictionary = new Dictionary<string, AddPersonDetails>();
 
@@ -84,8 +85,9 @@ namespace AddressBook
                 Console.WriteLine("6. View Person By State or City");
                 Console.WriteLine("7. Ability To Count Person By State or City");
                 Console.WriteLine("8. Sort Details");
-                ///Console.WriteLine("9. Sort by City, State or Zip");
-                Console.WriteLine("9. Exit");
+                Console.WriteLine("9. Write Into File");
+                Console.WriteLine("10. Read From File");
+                Console.WriteLine("11. Exit");
 
                 string choice = Console.ReadLine();
                 int ch = Convert.ToInt32(choice);
@@ -121,6 +123,12 @@ namespace AddressBook
                         addressBookDetails.SortByName();
                         break;
                     case 9:
+                        addressBookDetails.WriteIntoFileUsingFileIO();
+                        break;
+                    case 10:
+                        addressBookDetails.ReadFromFileUsingFileIO();
+                        break;
+                    case 11:
                         return;
                 }
             }
@@ -430,8 +438,62 @@ namespace AddressBook
             }
             return 0;
         }
+
+        /// <summary>
+        /// Writing into file using StreamWriter.
+        /// </summary>
+        public void WriteIntoFileUsingFileIO()
+        {
+            string path = "C:/Users/HP/Desktop/SanjuBridgelabz/AddressBookSystems/AddressBook/PersonDetails.txt";
+            if (File.Exists(path))
+            {
+
+                //---Using----->keyword will automatically close the file after performing operation. No need to close it like dispose() method.
+                using (StreamWriter streamWriter = File.AppendText(path))
+                {
+                    foreach (Contacts dataEntry in this.list)
+                    {
+                        streamWriter.WriteLine(dataEntry);
+                    }
+                }
+
+                Console.WriteLine("SucessFully write into .txt file");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("File does not exist beacuse of wrong path or file name!!");
+            }
+        }
+
+        /// <summary>
+        /// Reading fro file using StreamReader.
+        /// </summary>
+        public void ReadFromFileUsingFileIO()
+        {
+            string path = "C:/Users/HP/Desktop/SanjuBridgelabz/AddressBookSystems/AddressBook/PersonDetails.txt";
+            if (File.Exists(path))
+            {
+
+                //---Using----->keyword will automatically close the file after performing operation. No need to close it like dispose() method.
+                using (StreamReader streamReader = File.OpenText(path))
+                {
+                    string data = "";
+                    while ((data = streamReader.ReadLine()) != null)
+                    {
+                        Console.WriteLine(data);
+                    }
+                    Console.ReadLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("File does not exists beacuse of wrong path or file name");
+            }
+        }
     }
 }
+
 
 
 

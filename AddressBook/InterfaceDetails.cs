@@ -52,5 +52,15 @@ namespace AddressBook
         /// Sort by name,city or zip.
         /// </summary>
         public void SortByName();
+
+        /// <summary>
+        /// Write nto file using file io method.
+        /// </summary>
+        public void WriteIntoFileUsingFileIO();
+
+        /// <summary>
+        /// Reading from file.
+        /// </summary>
+        public void ReadFromFileUsingFileIO();
     }
 }

@@ -9,14 +9,14 @@ namespace AddressBook
     /// </summary>
     public class Contacts
     {
-        private string firstName;
-        private string lastName;
-        private string address;
-        private string city;
-        private string state;
-        private int zipCode;
-        private long mobileNumber;
-        private string emailID;
+        public string firstName;
+        public string lastName;
+        public string address;
+        public string city;
+        public string state;
+        public int zipCode;
+        public long mobileNumber;
+        public string emailID;
 
 
         /// <summary>
